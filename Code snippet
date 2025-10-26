@@ -1,0 +1,126 @@
+/******************************************************************************
+
+Ai style  study sheduler
+project 4
+By Anand raj
+
+*******************************************************************************/
+
+#include <stdio.h>
+#include<time.h>
+#include<stdlib.h>
+#include<unistd.h>
+float calculate(int t , int rating , int totalrating){
+float b ;
+b = ((float)rating*t)/totalrating ;
+return b ;
+}
+
+float percent(int n , int m ){
+float d ;
+d = ( (float)m*100)/n ;
+return d ;
+
+}
+int automatic(int n){
+srand(time(NULL));
+return rand()% n ;
+}
+
+int main()
+{
+int n ,stu ;
+
+printf("Hey i am your Ai study mentor \n");
+printf("enter the no of students participate in study hunt\n ");
+scanf("%d", &stu );
+char student[stu][30];
+for(int i = 0 ; i< stu ; i++){
+printf("enter your name student %d \n"  , i + 1 );
+scanf("%s" , student[i]);	
+}
+float target[stu];
+for(int i = 0 ; i <stu ; i++){
+printf("hello  %s\n", student[i]) ;
+printf("enter number of subject you study\n");
+scanf("%d",&n);
+char subject[n][30];
+int rating[n] ;
+int hour ;
+printf("enter total hour available for your self study\n");
+scanf("%d",&hour);
+for(int i = 0 ; i < n ; i++){
+printf("enter subject %d name \n",i + 1 );
+
+scanf("%s" , subject[i]);
+
+}
+for(int i = 0 ; i<n ; i++){
+printf("enter subject %d difficulty level from 1 to 5 \n",i + 1 )   ;
+scanf("%d" , &rating[i]);
+}
+int b = 0 ;
+for(int i = 0 ; i < n ; i++){
+b = rating[i] + b ;
+}
+
+printf("your  personalized time table\n")  ;
+for(int i = 0 ; i< n ; i++){
+printf( "%s :  %1.2f   hour \n" , subject[i],calculate(hour,rating[i],b));
+
+}
+int study;
+
+printf("how many subject did you complete today\n");
+scanf("%d",&study);
+target[i] = percent(n, study) ;
+printf("you have studied     %.2f  percent on a day\n",target[i]);
+if(target[i] >= 90){
+printf("well done keep it up\n ");
+}
+else if (target[i]>= 70){
+printf(" you are doing good but need more attention\n");
+}
+else {
+printf("avoid distraction \n");
+}
+printf("Take 10-5  min break  every hour \n");
+printf("for efficient way of study \n");
+}
+float max = 0 ;
+printf("LEADER BOARD\n");
+for(int i = 0 ; i <stu ; i++){
+if(target[i]> max ){
+max = target[i] ;
+
+}
+printf("%s  :   %.2f\n ",  student[i], target[i]);
+target[i] = 0 ;
+
+}
+sleep(4) ;
+int   quotes ;
+quotes = automatic(4) ;
+
+switch(quotes){
+case 0:
+printf ("The greatest happiness in life is doing the work,\n");
+printf ("that people say you cannot do.\n");
+break ;
+case 1 :
+printf ("Learn to appreciate what you have,\n");
+printf("because many people crave for it.\n");
+break ;
+case 2:
+printf("Consider yourself special,\n");
+printf("because God doesn’t create anything in vain.\n");
+break ;
+case 3 :
+printf("Never leave the company of two companions,\n");
+printf("One is patience and the other is a test.\n");
+break ;
+}
+return 0;
+
+}
+
